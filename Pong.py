@@ -7,10 +7,10 @@ import pygame
 import time
 clock = pygame.time.Clock()
 pygame.init()
-x_position = 310
-y_position = 230
-x2_position = 310
-y2_position = 230
+x_position = 0
+y_position = 0
+x2_position = 0
+y2_position = 0
 
 x_velocity = 0
 y_velocity = 0
@@ -19,11 +19,11 @@ y2_velocity = 0
 
 xK_position = 0
 yK_position = 0
-xK_velocity = 0
-yK_velocity = 0
+xK_velocity = 2
+yK_velocity = 2
 
 window_size = window_width, window_height = 960, 720
-window = pygame.display.set_mode(window_size, pygame.RESIZABLE)
+window = pygame.display.set_mode(window_size)
 
 pygame.display.set_caption('PUBG')
 
@@ -45,32 +45,30 @@ while running:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             running = False
 
+        # PLAYER 1
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                y_velocity = -10
+                y2_velocity = -10
             elif event.key == pygame.K_DOWN:
-                y_velocity = 10
-        #elif event.type == pygame.KEYUP:
-            #y_velocity = 0
+                y2_velocity = 10
 
         # PLAYER 2
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
-                y2_velocity = -10
+                y_velocity = -10
             elif event.key == pygame.K_s:
-                y2_velocity = 10
-        #elif event.type == pygame.KEYUP:
-            #y2_velocity = 0
+                y_velocity = 10
 
-        xK_velocity = 2
-        yK_velocity = 2
 
+    #Bolti
     xK_position += xK_velocity
     yK_position += yK_velocity
 
+    #Player 1 (Vinstri)
     x_position += x_velocity
     y_position += y_velocity
 
+    #Player 2 (Hægri)
     x2_position += x2_velocity
     y2_position += y2_velocity
 
@@ -80,17 +78,20 @@ while running:
     pygame.draw.rect(window, WHITE, pygame.Rect(900, y2_position, 10, 50))
     pygame.draw.line(window, WHITE, (480, 0), (480, 1000))
 
+    #hér fyrir neðan eru bara línur sem sýna hvar borderarnir eru
+    #pygame.draw.line(window, RED, (959, 0), (959, 1000))
+    #pygame.draw.line(window, RED, (0, 719), (1000, 719))
 
-    if y_position > 720 or y_position < 0:
+    if y_position > 660 or y_position < 0:
         y_velocity = 0
-    if y2_position > 720 or y2_position < 0:
+
+    if y2_position > 660 or y2_position < 0:
         y2_velocity = 0
 
-    if yK_position > 720 or yK_position < 0:
+    if yK_position > 710 or yK_position < 0:
         yK_velocity *= -1
-    if xK_position > 960 or xK_position < 0:
+    if xK_position > 950 or xK_position < 0:
         xK_velocity *= -1
-
 
     pygame.display.update()
     clock.tick(60)
