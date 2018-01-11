@@ -49,10 +49,32 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
-
+start_ticks = pygame.time.get_ticks()  # starter tick
+counter, text = 5, '5'.rjust(3)
+pygame.time.set_timer(pygame.USEREVENT, 1000)
+font = pygame.font.SysFont('Consolas', 30)
 teljari = 0
+asd = True
+
 running = True
 while running:
+    if counter != -2:
+        for e in pygame.event.get():
+            if e.type == pygame.USEREVENT:
+                counter -= 1
+                if counter > 0:
+                    text = str(counter).rjust(3)
+                else:
+                    text = 'START!'
+            if e.type == pygame.QUIT:
+                break
+        else:
+            window.fill((255, 255, 255))
+            window.blit(font.render(text, True, (0, 0, 0)), (450, 370))
+            pygame.display.flip()
+            clock.tick(60)
+            continue
+
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
@@ -172,10 +194,8 @@ while running:
                 yK_velocity += 1
             else:
                 yK_velocity -= 1
-    if teljari == 0:
-        time.sleep(4)
-    teljari += 1
     pygame.display.update()
     clock.tick(60)
+
 
 pygame.quit()
