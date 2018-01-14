@@ -31,7 +31,7 @@ x2_velocity = 0
 y2_velocity = 0
 
 xK_position = 480
-yK_position = 385
+yK_position = 400
 listi = [2, -2]
 xK_velocity = listi[randint(0, 1)]
 yK_velocity = listi[randint(0, 1)]
@@ -99,6 +99,7 @@ while running:
                 y2_velocity = 8
         #elif event.type == pygame.KEYUP:
             #y2_velocity = 0
+
     # Bolti
     xK_position += xK_velocity
     yK_position += yK_velocity
@@ -154,6 +155,7 @@ while running:
         yK_position = 360
         yK_velocity = listi[randint(0, 1)]
         xK_velocity = listi[randint(0, 1)]
+
     if xK_position < 10:
         p2 += 1
         xK_position = 480
