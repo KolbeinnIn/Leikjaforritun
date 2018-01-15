@@ -1,6 +1,6 @@
 # Kolbeinn Ingólfsson
 # 10.1.2018
-# Skilaverkefni 1
+# Skilaverkefni 1 - Pong
 
 
 import pygame
@@ -49,12 +49,10 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
-start_ticks = pygame.time.get_ticks()  # starter tick
+start_ticks = pygame.time.get_ticks()
 counter, text = 5, '5'.rjust(3)
 pygame.time.set_timer(pygame.USEREVENT, 1000)
 font = pygame.font.SysFont('Consolas', 30)
-teljari = 0
-asd = True
 
 running = True
 while running:
@@ -76,7 +74,6 @@ while running:
             continue
 
     for event in pygame.event.get():
-
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
@@ -136,7 +133,7 @@ while running:
 
     # hér fyrir neðan eru bara línur sem sýna hvar borderarnir eru
     # pygame.draw.line(window, RED, (959, 0), (959, 1000))
-    # pygame.draw.line(window, RED, (1, 0), (1, 1000))
+    pygame.draw.line(window, RED, (1, 0), (1, 1000))
     # pygame.draw.line(window, RED, (0, 719), (1000, 719))
     # pygame.draw.line(window, RED, (0, 1), (1000, 1))
 
@@ -187,6 +184,7 @@ while running:
             # print("Bolti Y:", yK_position)
             # print("\nLeft bo: ", y_position)
             # print("left+50: ", (y_position + 50))
+
             xK_velocity *= -1
             if xK_velocity > 0:
                 xK_velocity += 1
@@ -196,6 +194,7 @@ while running:
                 yK_velocity += 1
             else:
                 yK_velocity -= 1
+
     pygame.display.update()
     clock.tick(60)
 
