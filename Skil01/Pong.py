@@ -115,7 +115,7 @@ while running:
     pygame.draw.circle(window, WHITE, (xK_position, yK_position), 10)
     pygame.draw.rect(window, WHITE, pygame.Rect(50, y_position, 10, 50))
     pygame.draw.rect(window, WHITE, pygame.Rect(900, y2_position, 10, 50))
-    pygame.draw.line(window, WHITE, (480, 50), (480, 1000))
+    pygame.draw.line(window, WHITE, (480, 50), (480, 960))
     pygame.draw.line(window, WHITE, (0, 50), (1000, 50))
     pygame.draw.line(window, WHITE, (0, 49), (1000, 49))
 
@@ -133,7 +133,7 @@ while running:
 
     # hér fyrir neðan eru bara línur sem sýna hvar borderarnir eru
     # pygame.draw.line(window, RED, (959, 0), (959, 1000))
-    pygame.draw.line(window, RED, (1, 0), (1, 1000))
+    # pygame.draw.line(window, RED, (1, 0), (1, 1000))
     # pygame.draw.line(window, RED, (0, 719), (1000, 719))
     # pygame.draw.line(window, RED, (0, 1), (1000, 1))
 
