@@ -29,7 +29,7 @@ YELLOW = (255, 255, 0)
 my_font = pygame.font.SysFont("", 30)
 ten = [asd1, asd2, asd3, asd4, asd5, asd6]
 def a(listi):
-    return listi[randint(0, 4)]
+    return listi[randint(0, 5)]
 
 window.fill(BLACK)
 window.blit(a(ten), (370, 200))
@@ -37,6 +37,7 @@ window.blit(a(ten), (495, 200))
 window.blit(a(ten), (300, 330))
 window.blit(a(ten), (430, 330))
 window.blit(a(ten), (560, 330))
+
 pygame.draw.rect(window, WHITE, pygame.Rect(427, 470, 100, 60))
 label = my_font.render('X', 1, YELLOW)
 
