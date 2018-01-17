@@ -85,8 +85,8 @@ while running:
                 y_velocity = -8
             elif event.key == pygame.K_s:
                 y_velocity = 8
-        #elif event.type == pygame.KEYUP:
-            #y_velocity = 0
+        elif event.type == pygame.KEYUP:
+            y_velocity = 0
 
         # PLAYER 2
         if event.type == pygame.KEYDOWN:
@@ -94,8 +94,8 @@ while running:
                 y2_velocity = -8
             elif event.key == pygame.K_DOWN:
                 y2_velocity = 8
-        #elif event.type == pygame.KEYUP:
-            #y2_velocity = 0
+        elif event.type == pygame.KEYUP:
+            y2_velocity = 0
 
     # Bolti
     xK_position += xK_velocity

@@ -62,8 +62,6 @@ while running:
             if 527 > event.pos[0] > 427:
                 if 530 > event.pos[1] > 470:
                     pygame.display.update()
-            #pygame.draw.circle(window, GREEN, event.pos, 20, 0)
-
 
     window.blit(a(ten), (370, 200))
     window.blit(a(ten), (495, 200))
