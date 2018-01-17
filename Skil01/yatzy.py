@@ -7,16 +7,35 @@ from random import *
 
 pygame.init()
 
+
+class Box:
+    def __init__(self, box_image, x_pos=0, y_pos=0):
+        self.image = pygame.image.load(box_image).convert()
+        self.rect = self.image.get_rect()
+        self.rect.x = x_pos
+        self.rect.y = y_pos
+
+
+def a(listi):
+    return listi[randint(0, 5)]
+
+
+ten = ["sd1.png", "sd2.png", "sd3.png", "sd4.png", "sd5.png", "sd6.png"]
+
 window_size = window_width, window_height = 960, 720
 window = pygame.display.set_mode(window_size)
 
 pygame.display.set_caption('Yatzy')
-asd1 = pygame.image.load("sd1.png")
-asd2 = pygame.image.load("sd2.png")
-asd3 = pygame.image.load("sd3.png")
-asd4 = pygame.image.load("sd4.png")
-asd5 = pygame.image.load("sd5.png")
-asd6 = pygame.image.load("sd6.png")
+# takki = pygame.image.load("takki_box.png")
+
+
+listi = [(370, 200), (495, 200), (300, 330), (430, 330), (560, 330)]
+
+boxes = []
+boxes.append(Box("takki_box.png", 424, 470))
+for x in range(len(listi)):
+    boxes.append(Box(a(ten), listi[x][0], listi[x][1]))
+
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -27,26 +46,18 @@ GREY = (70, 80, 90)
 YELLOW = (255, 255, 0)
 
 my_font = pygame.font.SysFont("", 30)
-ten = [asd1, asd2, asd3, asd4, asd5, asd6]
-def a(listi):
-    return listi[randint(0, 4)]
 
 window.fill(BLACK)
-window.blit(a(ten), (370, 200))
-window.blit(a(ten), (495, 200))
-window.blit(a(ten), (300, 330))
-window.blit(a(ten), (430, 330))
-window.blit(a(ten), (560, 330))
-pygame.draw.rect(window, WHITE, pygame.Rect(427, 470, 100, 60))
-label = my_font.render('X', 1, YELLOW)
+
+
+for x in range(6):
+    window.blit(boxes[x].image, (boxes[x].rect.x, boxes[x].rect.y))
 
 pygame.display.update()
 
-#427, 470
-#527, 530
-
-my_font = pygame.font.SysFont("", 30)
 # pygame.draw.line(window, WHITE, (480, 50), (480, 1000)) helmingarlína skjásins
+
+teningur = 0
 
 running = True
 while running:
@@ -55,18 +66,30 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             running = False
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-            pygame.display.update()
 
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if 527 > event.pos[0] > 427:
-                if 530 > event.pos[1] > 470:
-                    pygame.display.update()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            for box in boxes:
+                if box.rect.collidepoint(event.pos):
+                    print(teningur)
+                    if box.rect.collidepoint(event.pos) == boxes[0].rect.collidepoint(event.pos):
+                        if teningur == 0:
+                            print("asd")
+                            for x in range(len(boxes)-1):
+                                boxes[x] = (Box(a(ten), listi[x][0], listi[x][1]))
+                        else:
+                            print("asd1")
+                            for x in range(1, 6):
+                                if teningur == x:
+                                    boxes[x] = (Box(a(ten), listi[teningur-1][0], listi[teningur-1][1]))
 
-    window.blit(a(ten), (370, 200))
-    window.blit(a(ten), (495, 200))
-    window.blit(a(ten), (300, 330))
-    window.blit(a(ten), (430, 330))
-    window.blit(a(ten), (560, 330))
+                        for x in range(1, 6):
+                            window.blit(boxes[x].image, (boxes[x].rect.x, boxes[x].rect.y))
+                        pygame.display.update()
+
+                    for x in range(1, 6):
+                        if box.rect.collidepoint(event.pos) == boxes[x].rect.collidepoint(event.pos):
+                            teningur = x
+
+
 
 pygame.quit()
