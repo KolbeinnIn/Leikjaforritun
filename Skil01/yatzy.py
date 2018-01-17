@@ -58,7 +58,7 @@ pygame.display.update()
 # pygame.draw.line(window, WHITE, (480, 50), (480, 1000)) helmingarlína skjásins
 
 teningur = 0
-
+teljari = 0
 running = True
 while running:
     for event in pygame.event.get():
@@ -68,27 +68,34 @@ while running:
             running = False
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            for box in boxes:
-                if box.rect.collidepoint(event.pos):
-                    print(teningur)
-                    if box.rect.collidepoint(event.pos) == boxes[0].rect.collidepoint(event.pos):
-                        if teningur == 0:
-                            print("asd")
-                            for x in range(len(boxes)-1):
-                                boxes[x] = (Box(a(ten), listi[x][0], listi[x][1]))
-                        else:
-                            print("asd1")
+            if teljari == 2:
+                window.fill(BLACK)
+                for x in range(1, 6):
+                    window.blit(boxes[x].image, (boxes[x].rect.x, boxes[x].rect.y))
+
+                pygame.display.update()
+                #forrit stoppar
+            else:
+                for box in boxes:
+                    if box.rect.collidepoint(event.pos):
+                        if box.rect.collidepoint(event.pos) == boxes[0].rect.collidepoint(event.pos):
+                            teljari += 1
+                            if teningur == 0:
+                                for x in range(len(boxes)-1):
+                                    print(x)
+                                    boxes[x] = (Box(a(ten), listi[x][0], listi[x][1]))
+                            else:
+                                for x in range(1, 6):
+                                    if teningur == x:
+                                        boxes[x] = (Box(a(ten), listi[teningur-1][0], listi[teningur-1][1]))
                             for x in range(1, 6):
-                                if teningur == x:
-                                    boxes[x] = (Box(a(ten), listi[teningur-1][0], listi[teningur-1][1]))
+                                window.blit(boxes[x].image, (boxes[x].rect.x, boxes[x].rect.y))
+                            pygame.display.update()
 
                         for x in range(1, 6):
-                            window.blit(boxes[x].image, (boxes[x].rect.x, boxes[x].rect.y))
-                        pygame.display.update()
-
-                    for x in range(1, 6):
-                        if box.rect.collidepoint(event.pos) == boxes[x].rect.collidepoint(event.pos):
-                            teningur = x
+                            if box.rect.collidepoint(event.pos) == boxes[x].rect.collidepoint(event.pos):
+                                teningur = x
+                        print(teningur, "----")
 
 
 

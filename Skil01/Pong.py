@@ -32,7 +32,7 @@ y2_velocity = 0
 
 xK_position = 480
 yK_position = 400
-listi = [2, -2]
+listi = [3, -3]
 xK_velocity = listi[randint(0, 1)]
 yK_velocity = listi[randint(0, 1)]
 
@@ -86,7 +86,10 @@ while running:
             elif event.key == pygame.K_s:
                 y_velocity = 8
         elif event.type == pygame.KEYUP:
-            y_velocity = 0
+            if event.key == pygame.K_w:
+                y_velocity = 0
+            elif event.key == pygame.K_s:
+                y_velocity = 0
 
         # PLAYER 2
         if event.type == pygame.KEYDOWN:
@@ -95,7 +98,10 @@ while running:
             elif event.key == pygame.K_DOWN:
                 y2_velocity = 8
         elif event.type == pygame.KEYUP:
-            y2_velocity = 0
+            if event.key == pygame.K_UP:
+                y2_velocity = 0
+            elif event.key == pygame.K_DOWN:
+                y2_velocity = 0
 
     # Bolti
     xK_position += xK_velocity
