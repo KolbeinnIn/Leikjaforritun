@@ -72,7 +72,6 @@ while running:
                 window.fill(BLACK)
                 for x in range(1, 6):
                     window.blit(boxes[x].image, (boxes[x].rect.x, boxes[x].rect.y))
-
                 pygame.display.update()
                 #forrit stoppar
             else:
