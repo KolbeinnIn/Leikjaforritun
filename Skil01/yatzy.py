@@ -36,7 +36,6 @@ boxes.append(Box("takki_box.png", 424, 470))
 for x in range(len(listi)):
     boxes.append(Box(a(ten), listi[x][0], listi[x][1]))
 
-
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
@@ -48,7 +47,6 @@ YELLOW = (255, 255, 0)
 my_font = pygame.font.SysFont("", 30)
 
 window.fill(BLACK)
-
 
 for x in range(6):
     window.blit(boxes[x].image, (boxes[x].rect.x, boxes[x].rect.y))
@@ -68,35 +66,41 @@ while running:
             running = False
 
         if event.type == pygame.MOUSEBUTTONDOWN:
+            test = 0
             if teljari == 2:
                 window.fill(BLACK)
-                for x in range(1, 6):
+                for x in range(len(boxes)):
                     window.blit(boxes[x].image, (boxes[x].rect.x, boxes[x].rect.y))
-
                 pygame.display.update()
-                #forrit stoppar
+                print(len(boxes))
+                # forrit stoppar
             else:
                 for box in boxes:
                     if box.rect.collidepoint(event.pos):
                         if box.rect.collidepoint(event.pos) == boxes[0].rect.collidepoint(event.pos):
+                            print(len(boxes), "LENGD")
                             teljari += 1
                             if teningur == 0:
-                                for x in range(len(boxes)-1):
-                                    print(x)
-                                    boxes[x] = (Box(a(ten), listi[x][0], listi[x][1]))
+                                for x in range(len(boxes) - 1):
+                                    boxes[x] = (Box(a(ten), listi[x][0], listi[x][1]))  #nýtt kast á öllum
+
                             else:
+                                print("jhndasjkdajkdasjkgasdhglasdgklhlkgasdl")
                                 for x in range(1, 6):
                                     if teningur == x:
-                                        boxes[x] = (Box(a(ten), listi[teningur-1][0], listi[teningur-1][1]))
-                            for x in range(1, 6):
+                                        boxes[x] = (Box(a(ten), listi[teningur - 1][0], listi[teningur - 1][1]))
+                            for x in range(6):
                                 window.blit(boxes[x].image, (boxes[x].rect.x, boxes[x].rect.y))
                             pygame.display.update()
 
                         for x in range(1, 6):
+                            test += 1
                             if box.rect.collidepoint(event.pos) == boxes[x].rect.collidepoint(event.pos):
-                                teningur = x
-                        print(teningur, "----")
-
-
+                                print(x, "bBÆBÆB")
+                                if test == 6:
+                                    teningur = "j,hvclghsfdljkg"
+                                else:
+                                    teningur = x
+                print(teningur, "----")
 
 pygame.quit()
