@@ -31,10 +31,13 @@ pygame.display.set_caption('Yatzy')
 
 listi = [(370, 200), (495, 200), (300, 330), (430, 330), (560, 330)]
 
+listiS = []
 boxes = []
 boxes.append(Box("takki_box.png", 424, 470))
 for x in range(len(listi)):
-    boxes.append(Box(a(ten), listi[x][0], listi[x][1]))
+    rand = a(ten)
+    listiS.append(int(rand[2]))
+    boxes.append(Box(rand, listi[x][0], listi[x][1]))
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -44,10 +47,9 @@ BLUE = (0, 0, 255)
 GREY = (70, 80, 90)
 YELLOW = (255, 255, 0)
 
-my_font = pygame.font.SysFont("", 30)
+my_font = pygame.font.SysFont("", 60)
 
 window.fill(BLACK)
-
 for x in range(6):
     window.blit(boxes[x].image, (boxes[x].rect.x, boxes[x].rect.y))
 
@@ -65,42 +67,44 @@ while running:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             running = False
 
+        if teljari == 2:
+            window.fill(BLACK)
+            for x in range(1, len(boxes)):
+                window.blit(boxes[x].image, (boxes[x].rect.x, boxes[x].rect.y))
+
+            label = my_font.render('%s' % sum(listiS), 1, WHITE)
+            window.blit(label, (453, 60))
+            pygame.display.update()
+            # forrit stoppar
+
         if event.type == pygame.MOUSEBUTTONDOWN:
-            test = 0
-            if teljari == 2:
-                window.fill(BLACK)
-                for x in range(len(boxes)):
-                    window.blit(boxes[x].image, (boxes[x].rect.x, boxes[x].rect.y))
-                pygame.display.update()
-                print(len(boxes))
-                # forrit stoppar
-            else:
+            if teljari != 2:
                 for box in boxes:
                     if box.rect.collidepoint(event.pos):
                         if box.rect.collidepoint(event.pos) == boxes[0].rect.collidepoint(event.pos):
                             print(len(boxes), "LENGD")
                             teljari += 1
                             if teningur == 0:
-                                for x in range(len(boxes) - 1):
-                                    boxes[x] = (Box(a(ten), listi[x][0], listi[x][1]))  #nýtt kast á öllum
+                                for x in range(1, len(boxes)):
+                                    rand = a(ten)
+                                    listiS[x-1] = int(rand[2])
+                                    boxes[x] = (Box(rand, listi[x-1][0], listi[x-1][1]))  # nýtt kast á öllum
 
                             else:
-                                print("jhndasjkdajkdasjkgasdhglasdgklhlkgasdl")
                                 for x in range(1, 6):
+                                    print(x)
                                     if teningur == x:
-                                        boxes[x] = (Box(a(ten), listi[teningur - 1][0], listi[teningur - 1][1]))
+                                        rand = a(ten)
+                                        listiS[x-1] = int(rand[2])
+                                        boxes[x] = (Box(rand, listi[teningur - 1][0], listi[teningur - 1][1]))
                             for x in range(6):
                                 window.blit(boxes[x].image, (boxes[x].rect.x, boxes[x].rect.y))
                             pygame.display.update()
-
-                        for x in range(1, 6):
-                            test += 1
-                            if box.rect.collidepoint(event.pos) == boxes[x].rect.collidepoint(event.pos):
-                                print(x, "bBÆBÆB")
-                                if test == 6:
-                                    teningur = "j,hvclghsfdljkg"
-                                else:
+                        else:
+                            for x in range(1, 6):
+                                if box.rect.collidepoint(event.pos) == boxes[x].rect.collidepoint(event.pos):
+                                    print(x, "bBÆBÆB")
                                     teningur = x
-                print(teningur, "----")
+                                    break
 
 pygame.quit()
