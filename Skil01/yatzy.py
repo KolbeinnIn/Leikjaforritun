@@ -2,9 +2,13 @@
 # 15.1.2018
 # Skilaverkefni 1 - yatzy
 
+
+
+
 import pygame
 from random import *
 
+clock = pygame.time.Clock()
 pygame.init()
 
 
@@ -96,6 +100,7 @@ while running:
                                 teningur = x
                         print(teningur, "----")
 
-
+    pygame.display.update()
+    clock.tick(60)
 
 pygame.quit()
