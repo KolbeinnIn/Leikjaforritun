@@ -8,6 +8,11 @@ from random import *
 sprengjur = []
 varnir = []
 veggir = []
+endir = []
+
+
+def radius():
+    return randint(6, 8)
 
 
 class Player(object):
@@ -15,6 +20,7 @@ class Player(object):
         self.rect = pygame.Rect(16, 16, 16, 16)
         self.fjVarna = 0
         self.ovirkarSprengjur = 0
+        self.stig = 0
 
     def move(self, dx, dy):
 
@@ -52,33 +58,55 @@ class Player(object):
                 if dy < 0:  # Moving up; Hit the bottom side of the wall
                     self.rect.top = veggur.rect.bottom
 
+        for e in range(0, len(endir), 2):
+            if endir[e+1] == 0:
+                if self.rect.colliderect(endir[e].rect):
+                    if dx > 0:  # left
+                        self.rect.right = endir[e].rect.left
+                    if dx < 0:  # right
+                        self.rect.left = endir[e].rect.right
+                    if dy > 0:  # top
+                        self.rect.bottom = endir[e].rect.top
+                    if dy < 0:  # bot
+                        self.rect.top = endir[e].rect.bottom
+            else:
+                flag = True
+
         for sprengja in sprengjur:
             if self.rect.colliderect(sprengja.rect):
                 if self.fjVarna >= 1:
-                    print(self.fjVarna)
+                    print(self.fjVarna, "Fjöldi varna")
                     if dx > 0:
                         self.rect.right = sprengja.rect.left
                         sprengjur.remove(sprengja)
-                        self.ovirkarSprengjur -= 1
+                        self.ovirkarSprengjur += 1
                         self.fjVarna -= 1
+                        self.stig += 5
+                        print(self.stig, "asd")
                     if dx < 0:
                         self.rect.left = sprengja.rect.right
                         sprengjur.remove(sprengja)
                         self.ovirkarSprengjur += 1
                         self.fjVarna -= 1
+                        self.stig += 5
+                        print(self.stig, "asd2")
                     if dy > 0:
                         self.rect.bottom = sprengja.rect.top
                         sprengjur.remove(sprengja)
                         self.ovirkarSprengjur += 1
                         self.fjVarna -= 1
+                        self.stig += 5
+                        print(self.stig, "asd3")
                     if dy < 0:
                         self.rect.top = sprengja.rect.bottom
                         sprengjur.remove(sprengja)
                         self.ovirkarSprengjur += 1
                         self.fjVarna -= 1
+                        self.stig += 5
+                        print(self.stig, "asd4")
                 else:
-                    print(sprengja)
-                    raise SystemExit("You hit something")
+                    raise SystemExit("BOOM!")
+
 
                 if dx > 0:
                     self.rect.right = sprengja.rect.left
@@ -105,10 +133,6 @@ class Player(object):
                     varnir.remove(vorn)
 
 
-def radius():
-    return randint(6, 8)
-
-
 class Sprengja(object):
 
     def __init__(self, pos):
@@ -127,3 +151,15 @@ class Veggur(object):
     def __init__(self, pos):
         veggir.append(self)
         self.rect = pygame.Rect(pos[0], pos[1], 16, 16)
+
+
+class Endir(object):
+    def __init__(self, pos, rg):
+        if rg == 1:
+            global endir
+            endir = []
+        endir.append(self)
+        endir.append(rg)
+        self.rect = pygame.Rect(pos[0], pos[1], 16, 16)
+
+
