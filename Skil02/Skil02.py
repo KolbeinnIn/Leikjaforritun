@@ -7,7 +7,6 @@ import pygame
 from random import *
 import os
 
-
 os.environ["SDL_VIDEO_CENTERED"] = "300"
 pygame.init()
 
@@ -33,25 +32,25 @@ count = 0
 
 level = [
     "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-    "W              W W                   W   W    W      W     W",
-    "W W WWWWWWWWWW W W   WWWWWWWWWWWWWWW W W WWWW W WWW  W     W",
+    "W             WW W                   W   W    W      W     W",
+    "W W WWWWWWWWWW W W WWWWWWWWWWWWWWWWW W W WWWW W WWW  W     W",
     "W W        W W W W                 W   W        W W  W     W",
     "W WWW WWWW W W W WWWWWWWWWW WWWWWWWWWWWW WWWWWWWW W  W     W",
     "W   W W  W W W W                       W W    W      W     W",
-    "W W      W W      WWWWWWWWWWWWWWWWWWWWWW WWWW WWWW   W     W",
+    "W W      W S      WWWWWWWWWWWWWWWWWWWWWW WWWW WWWW   W     W",
     "W WWWWWWWWWWWWWWW W                                        W",
-    "WV        S    W  WWW                                      W",
-    "WWWWWWWWWWWWWW W                                           W",
-    "W              W  WWWWWW                                   W",
-    "W              W                                           W",
-    "W              W                                           W",
+    "W              W  WWW                                      W",
+    "WVWWWWWWWWWWWW W  V                                        W",
+    "W            W W  WWWWWW                                   W",
+    "W   S        W W                                           W",
+    "W            W W                                           W",
+    "WV           W W                                           W",
+    "W     S        S                                           W",
     "W                                                          W",
     "W                                                          W",
-    "W                                                          W",
-    "W                                                          W",
-    "W                                                          W",
-    "W                                                          W",
-    "W                                                          W",
+    "W          V                                               W",
+    "W                S                                         W",
+    "W                       W                                  W",
     "W                                                          W",
     "W                                                          W",
     "W                                                          W",
@@ -129,14 +128,13 @@ level = [
 ]
 """
 
-radius = klasar.radius()
 x = y = 0
 for lina in level:
     for stafur in lina:
         if stafur == "W":
             klasar.Veggur((x, y))
         elif stafur == "E":
-            end_rect = pygame.Rect(x, y, 16, 16)
+            klasar.Endir((x, y), 0)
         elif stafur == "S":
             klasar.Sprengja((x, y))
         elif stafur == "V":
@@ -145,8 +143,15 @@ for lina in level:
     y += 16
     x = 0
 
+
+radius = []
+for a in range(len(sprengjur)):
+    radius.append(klasar.radius())
+
+
 running = True
 while running:
+    stig = player.stig
     clock.tick(60)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -155,32 +160,50 @@ while running:
             running = False
 
     key = pygame.key.get_pressed()
-    if key[pygame.K_LEFT]:
+    if key[pygame.K_LEFT] or key[pygame.K_a]:
         player.move(-2, 0)
-    if key[pygame.K_RIGHT]:
+    if key[pygame.K_RIGHT] or key[pygame.K_d]:
         player.move(2, 0)
-    if key[pygame.K_UP]:
+    if key[pygame.K_UP] or key[pygame.K_w]:
         player.move(0, -2)
-    if key[pygame.K_DOWN]:
+    if key[pygame.K_DOWN] or key[pygame.K_s]:
         player.move(0, 2)
 
-    if player.rect.colliderect(end_rect):
-        raise SystemExit("You win!")
 
-    window.fill((0, 0, 0))
+
+    window.fill(BLACK)
     for veggur in klasar.veggir:
-        pygame.draw.rect(window, (255, 255, 255), veggur.rect)
-    for sprengja in sprengjur:
-        pygame.draw.circle(window, lBlue, (sprengja.rect[0]+radius, sprengja.rect[1]+radius), radius)
+        pygame.draw.rect(window, WHITE, veggur.rect)
+
     for vorn in varnir:
         pygame.draw.rect(window, (50, 150, 120), vorn.rect)
-    pygame.draw.rect(window, (255, 0, 0), end_rect)
 
+    for sprengja in range(len(sprengjur)):
+        pygame.draw.circle(window, lBlue, (sprengjur[sprengja].rect[0] + radius[sprengja],
+                                           sprengjur[sprengja].rect[1] + radius[sprengja]), radius[sprengja])
+
+
+    if stig >= 15:
+        x = y = 0
+        for lina in level:
+            for stafur in lina:
+                if stafur == "E":
+                    klasar.Endir((x, y), 1)
+                x += 16
+            y += 16
+            x = 0
+        pygame.draw.rect(window, GREEN, klasar.endir[0])
+        if player.rect.colliderect(klasar.endir[0]):
+            raise SystemExit("Til hamingju!")
+
+    else:
+        pygame.draw.rect(window, RED, klasar.endir[0])
 
     if player.fjVarna >= 1:
-            spilari = YELLOW
+        spilari = YELLOW
     else:
         spilari = (255, 165, 0)
+
     pygame.draw.rect(window, spilari, player.rect)
     pygame.display.flip()
 pygame.quit()
