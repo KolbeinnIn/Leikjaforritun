@@ -56,7 +56,7 @@ level = [
     "W    W                                 W",
     "WSWWWWWWWWWWWWWWWWWWWWWWWWWWW WWWWWWWWWW",
     "W       W                              W",
-    "W WWWWWWWW WWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W WWWWWWWW WWW WWWWWWWWWWWWWWWWWWWWWWWWW",
     "W            W                         W",
     "W WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWSWWWW",
     "W                     S                W",
@@ -131,7 +131,7 @@ while running:
             raise SystemExit("Til hamingju!")
 
     else:
-        pygame.draw.rect(window, RED, klasar.endir[0])
+        pygame.draw.rect(window, WHITE, klasar.endir[0])
 
     if player.fjVarna >= 1:
         spilari = YELLOW
