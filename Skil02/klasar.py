@@ -12,7 +12,7 @@ endir = []
 
 
 def radius():
-    return randint(6, 8)
+    return randint(5, 8)
 
 
 class Player(object):
