@@ -10,7 +10,7 @@ import os
 os.environ["SDL_VIDEO_CENTERED"] = "300"
 pygame.init()
 
-window_size = window_width, window_height = 960, 720
+window_size = window_width, window_height = 640, 480
 window = pygame.display.set_mode(window_size)
 pygame.display.set_caption('Maze')
 
@@ -31,6 +31,7 @@ teljari = 0
 count = 0
 
 level = [
+<<<<<<< HEAD
     "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
     "W             WW W                   W   W    W      W     W",
     "W W WWWWWWWWWW W W WWWWWWWWWWWWWWWWW W W WWWW W WWW  W     W",
@@ -76,57 +77,39 @@ level = [
     "W                                                          W",
     "W                                                          W",
     "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWEW",
+=======
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W              W W                   W W",
+    "W W WWWWWWWWWW W W WWWWWWWWWWWWWWWWW W W",
+    "W W        W W W W                 V   W",
+    "W WWW WWWW W W W WWWWWWWWWW WWWWWWWWWWWW",
+    "W   W W VW W W W                       W",
+    "W W      W S      WWWWWWWWWWWWWWWWWWWWWW",
+    "W WWWWWWWWWWWWWWW W                   VW",
+    "W              W  WWWWWWWSWWWWWWWWWWWWWW",
+    "WVWWWWWWWWWWWW W V                     W",
+    "W              W WWWWWWWWWWWWWWWWWWSWWWW",
+    "WSWWWWWWWWWWWWWWS W                    W",
+    "W            W W WWWWWWWWWWWWWWWWWWWWWWW",
+    "WWWWWWWWWWWW W W                       W",
+    "W            W WSWWWWWWWWWWWW WWWWWWWWWW",
+    "W WWWWWWWWWW W W            W W   W   WW",
+    "W       S  W W W WWWWWWWWWWWW   W   W VW",
+    "WWWWWWWWWW W S W W   W      WWWWWWWWWWWW",
+    "W          WWW   S W   W W             W",
+    "WWWWWWW WWWWWWWWWWWWWWWW WWWWWWWWWWWWWWW",
+    "W VW         W                         W",
+    "W WW WWWWWWW WWWWWWWWWWWWWWWWWWWWWWWWWSW",
+    "W    W                                 W",
+    "WSWWWWWWWWWWWWWWWWWWWWWWWWWWW WWWWWWWWWW",
+    "W       W                              W",
+    "W WWWWWWWW WWW WWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W            W                         W",
+    "W WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWSWWWW",
+    "W                     S                W",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWEW",
+>>>>>>> 86945091c86918de7676b884a58b7df30bc22b44
 ]
-"""
-level = [
-    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-    "W WA      W                                   WW           W",
-    "W WWW W W WWWWWWWWWWW WWWWWWWWWWWWWWWWWWWWWWW WW WWWWWWWWW W",
-    "WA    W W           W W                          W         W",
-    "WBWWWWW WWWWWW WWWWWW W WWWWWWWWWWWWWWWWWWWWWWWWWW WWWWW WWW",
-    "W W       W           W W                        W   W   W W",
-    "W WWWWWWWWW WWWWWW WWWW W WWWWWWWWWWWWWWWWWWWWWWWWWWWW W W W",
-    "W W       W W    W W  W   W        W        W   W   W  W   W",
-    "W W WWWWWWW W WW W W WWWWWW WWWWWWWW WWWWWW W W W W W WWWW W",
-    "W W         W WW W W W      W        W        W   W W    W W",
-    "W WWW WWWWWWW W  W W W WWW  W WWWW WWW WWWWWWWWWWWW WWWW W W",
-    "W W   W       WWWW W W W WWWW WW   W    W W   W   W    W W W",
-    "W W WWW WWWWWWW    W W W       W WWW WWWW W W W W W WWWW W W",
-    "W W W   W       WWWW W W WWWWW W W   W      W W W   W    W W",
-    "W W W WWW WWWWWWW      W     W W WWWWWWWWWWWW W WWWWW WWWW W",
-    "W W W  W  W       WWWWWWWWWW W W              W     W    W W",
-    "W W WW W WW WWWWWWW          W W WWWWWWWWWWWWWWWWWWWWWWW WWW",
-    "W        WW W     W WWWWWWWWWW W W   W   W   W   W   W   W W",
-    "W WWWWW WW  W WWWWW W          W   W   W   W   W   W   W   W",
-    "W W     WW WW W   W W WWWW WWWWWWWWWWWWWWW WWWWWWWWWWWWWWWWW",
-    "W W WWWWW  W  W W W W W  W W             W W               W",
-    "W W W     WW WW WWWWW WW W WWWWWWWWWWWWW W W WWWWWWWWWWWW  W",
-    "W   W WWWWW  W           W               W   W          W  W",
-    "W W W WW     W WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW W  W",
-    "W W      WWW W                              W         W W  W",
-    "W WWWWWWWW W WWWWWWWW                       W WWWWWWWWW W  W",
-    "W W          W                              W W       W W  W",
-    "W     WWWWWWWW                              W W WWWWW W W  W",
-    "W W                                           W W W W W W  W",
-    "W   W                                       WWW W W W      W",
-    "W W W                               B       WWWWWWWWWWWWWWWW",
-    "W W W                                                      W",
-    "W W W                                                      W",
-    "W W W              X                                       W",
-    "W W W                                                      W",
-    "W W W                                                      W",
-    "W W WWWWW               B                                  W",
-    "W W     W                                                  W",
-    "W WWWWW W                                                  W",
-    "W W   W W                                                  W",
-    "W W W W W                                                  W",
-    "W W W W W                                                  W",
-    "W WWW W WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWXW",
-    "W     W                                                  X E",
-    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-
-]
-"""
 
 x = y = 0
 for lina in level:
@@ -182,7 +165,6 @@ while running:
         pygame.draw.circle(window, lBlue, (sprengjur[sprengja].rect[0] + radius[sprengja],
                                            sprengjur[sprengja].rect[1] + radius[sprengja]), radius[sprengja])
 
-
     if stig >= 15:
         x = y = 0
         for lina in level:
@@ -197,7 +179,7 @@ while running:
             raise SystemExit("Til hamingju!")
 
     else:
-        pygame.draw.rect(window, RED, klasar.endir[0])
+        pygame.draw.rect(window, WHITE, klasar.endir[0])
 
     if player.fjVarna >= 1:
         spilari = YELLOW
