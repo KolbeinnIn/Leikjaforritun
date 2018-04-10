@@ -104,7 +104,6 @@ while running:
         player.move(0, 2)
 
 
-
     window.fill(BLACK)
     for veggur in klasar.veggir:
         pygame.draw.rect(window, WHITE, veggur.rect)
