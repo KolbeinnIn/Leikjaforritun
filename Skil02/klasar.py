@@ -151,4 +151,3 @@ class Endir(object):
         endir.append(rg)
         self.rect = pygame.Rect(pos[0], pos[1], 16, 16)
 
-
