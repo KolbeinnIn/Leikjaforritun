@@ -29,39 +29,38 @@ sprengjur = klasar.sprengjur
 varnir = klasar.varnir
 teljari = 0
 count = 0
-
-level = [
-    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-    "W              W W                   W W",
-    "W W WWWWWWWWWW W W WWWWWWWWWWWWWWWWW W W",
-    "W W        W W W W                 V   W",
-    "W WWW WWWW W W W WWWWWWWWWW WWWWWWWWWWWW",
-    "W   W W VW W W W                       W",
-    "W W      W S      WWWWWWWWWWWWWWWWWWWWWW",
-    "W WWWWWWWWWWWWWWW W                   VW",
-    "W              W  WWWWWWWSWWWWWWWWWWWWWW",
-    "WVWWWWWWWWWWWW W V                     W",
-    "W              W WWWWWWWWWWWWWWWWWWSWWWW",
-    "WSWWWWWWWWWWWWWWS W                    W",
-    "W            W W WWWWWWWWWWWWWWWWWWWWWWW",
-    "WWWWWWWWWWWW W W                       W",
-    "W            W WSWWWWWWWWWWWW WWWWWWWWWW",
-    "W WWWWWWWWWW W W            W W   W   WW",
-    "W       S  W W W WWWWWWWWWWWW   W   W VW",
-    "WWWWWWWWWW W S W W   W      WWWWWWWWWWWW",
-    "W          WWW   S W   W W             W",
-    "WWWWWWW WWWWWWWWWWWWWWWW WWWWWWWWWWWWWWW",
-    "W VW         W                         W",
-    "W WW WWWWWWW WWWWWWWWWWWWWWWWWWWWWWWWWSW",
-    "W    W                                 W",
-    "WSWWWWWWWWWWWWWWWWWWWWWWWWWWW WWWWWWWWWW",
-    "W       W                              W",
-    "W WWWWWWWW WWW WWWWWWWWWWWWWWWWWWWWWWWWW",
-    "W            W                         W",
-    "W WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWSWWWW",
-    "W                     S                W",
-    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWEW",
-]
+asd = len(sprengjur)
+level = ["WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+         "W              W W                   W W",
+         "W W WWWWWWWWWW W W WWWWWWWWWWWWWWWWW W W",
+         "W W        W W W W                 V   W",
+         "W WWW WWWW W W W WWWWWWWWWW WWWWWWWWWWWW",
+         "W   W W VW W W W                       W",
+         "W W      W S      WWWWWWWWWWWWWWWWWWWWWW",
+         "W WWWWWWWWWWWWWWW W                   VW",
+         "W              W  WWWWWWWSWWWWWWWWWWWWWW",
+         "WVWWWWWWWWWWWW W V                     W",
+         "W              W WWWWWWWWWWWWWWWWWWSWWWW",
+         "WSWWWWWWWWWWWWWWS W                    W",
+         "W            W W WWWWWWWWWWWWWWWWWWWWWWW",
+         "WWWWWWWWWWWW W W                       W",
+         "W            W WSWWWWWWWWWWWW WWWWWWWWWW",
+         "W WWWWWWWWWW W W            W W   W   WW",
+         "W       S  W W W WWWWWWWWWWWW   W   W VW",
+         "WWWWWWWWWW W S W W   W      WWWWWWWWWWWW",
+         "W          WWW   S W   W W             W",
+         "WWWWWWW WWWWWWWWWWWWWWWW WWWWWWWWWWWWWWW",
+         "W VW         W                         W",
+         "W WW WWWWWWW WWWWWWWWWWWWWWWWWWWWWWWWWSW",
+         "W    W                                 W",
+         "WSWWWWWWWWWWWWWWWWWWWWWWWWWWW WWWWWWWWWW",
+         "W       W                              W",
+         "W WWWWWWWW WWW WWWWWWWWWWWWWWWWWWWWWWWWW",
+         "W            W                         W",
+         "W WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWSWWWW",
+         "W                     S                W",
+         "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWEW",
+         ]
 
 x = y = 0
 for lina in level:
@@ -103,7 +102,6 @@ while running:
         player.move(0, -2)
     if key[pygame.K_DOWN] or key[pygame.K_s]:
         player.move(0, 2)
-
 
 
     window.fill(BLACK)
