@@ -13,11 +13,11 @@ bakgrunnur = pygame.image.load("images/spaceman.png")
 
 window_size = window_width, window_height = 846, 445
 window = pygame.display.set_mode(window_size)
-pygame.display.set_caption('Maze')
+pygame.display.set_caption('Space invaders')
 
 player = klasar.Player(window)
-enemy_image = pygame.image.load("images/enemy1_1.png")
-missile = pygame.image.load("images/missile.png")
+enemy_image = pygame.image.load("images/enemy1_1.png").convert_alpha()
+missile = pygame.image.load("images/missile.png").convert_alpha()
 
 IMG_NAMES = ["enemy1_1" for x in range(8)]
 IMAGES = {name: pygame.image.load("images/%s.png" % str(name)).convert_alpha()
@@ -92,8 +92,16 @@ while running:
 
     for shot in missile_list:
         shot.rect.y -= 5
-    #for block in enemy_list:
-        #block.rect.x += speed
+    for block in enemy_list:
+        if block.rect.x == 0:
+            speed = 1
+        if block.rect.x == 800:
+            speed = -1
+        block.rect.x += speed
+
+
+
+
 
     all_sprites_list.draw(window)
     pygame.display.flip()
