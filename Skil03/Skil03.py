@@ -14,6 +14,8 @@ bakgrunnur = pygame.image.load("images/spaceman.png")
 window_size = window_width, window_height = 846, 445
 window = pygame.display.set_mode(window_size)
 pygame.display.set_caption('Space invaders')
+pygame.mixer.pre_init(44100, -16, 1, 512)
+
 
 player = klasar.Player(window)
 enemy_image = pygame.image.load("images/enemy1_1.png").convert_alpha()
@@ -42,6 +44,12 @@ all_sprites_list = pygame.sprite.Group()
 all_sprites_list.add(player)
 
 
+sounds = {}
+for sound_name in ["ovinur_deyr", "skot"]:
+    sounds[sound_name] = pygame.mixer.Sound("sounds/{}.wav".format(sound_name))
+    sounds[sound_name].set_volume(10)
+
+
 for row in range(5):
     for column in range(10):
         enemy = klasar.Enemy(enemy_image)
@@ -52,11 +60,14 @@ for row in range(5):
 
 
 flag = True
+flag2 = False
 teljari = 0
 teljari2 = 2
 running = True
 speed = 1
+down = 0
 listi = []
+teljariD = 0
 while running:
     window.fill(BLACK)
     window.blit(bakgrunnur, [0, 0])
@@ -70,6 +81,7 @@ while running:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             running = False
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and teljari == 0:
+            sounds["skot"].play()
             shot = klasar.Missile(missile)
             shot.rect.x = player.rect.x + 22
             shot.rect.y = player.rect.y
@@ -88,21 +100,32 @@ while running:
     if key[pygame.K_RIGHT] or key[pygame.K_d]:
         player.move(2)
 
-    pygame.sprite.groupcollide(missile_list, enemy_list, True, True)
+    if pygame.sprite.groupcollide(missile_list, enemy_list, True, True):
+        pygame.sprite.groupcollide(missile_list, enemy_list, True, True)
+        sounds["ovinur_deyr"].play()
 
     for shot in missile_list:
         shot.rect.y -= 5
     for block in enemy_list:
         if block.rect.x == 0:
             speed = 1
+            flag2 = True
+            down = 7
         if block.rect.x == 800:
             speed = -1
+            flag2 = True
+            down = 7
+
+        """if flag2:
+            teljariD += 1
+            block.rect.y += down
+            print(teljariD, enemy_list.sprites()[teljariD].rect.y)
+            if teljariD == 5:
+                down = 0
+                flag2 = False
+                teljariD = 0
+        """
         block.rect.x += speed
-
-
-
-
-
     all_sprites_list.draw(window)
     pygame.display.flip()
 pygame.quit()
