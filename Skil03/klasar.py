@@ -12,8 +12,8 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("images/player.png").convert_alpha()
         self.rect = self.image.get_rect()
-        self.rect.x = 380
-        self.rect.y = 380
+        self.rect.x = 390
+        self.rect.y = 390
         self.stig = 0
         self.window = window
 

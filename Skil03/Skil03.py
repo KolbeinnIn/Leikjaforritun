@@ -46,11 +46,11 @@ all_sprites_list = pygame.sprite.Group()
 all_sprites_list.add(player)
 
 
-"""sounds = {}
-for sound_name in ["ovinur_deyr", "skot"]:
-    sounds[sound_name] = pygame.mixer.Sound("sounds/{}.wav".format(sound_name))
+sounds = {}
+for sound_name in ["ovinur_deyr", "skot", "cover_collision", "skot_collide"]:
+    sounds[sound_name] = pygame.mixer.Sound("sounds/{}.ogg".format(sound_name))
     sounds[sound_name].set_volume(10)
-"""
+
 #Enemies
 for row in range(4):
     for column in range(8):
@@ -76,10 +76,11 @@ flag2 = False
 teljari = 0
 teljari2 = 2
 running = True
-speed = 1
+speed = -1
+px = 1
 enemy_shot = 0
-
 lif = 4
+teljariS = 1
 while running:
     window.fill(BLACK)
     window.blit(bakgrunnur, [0, 0])
@@ -93,19 +94,19 @@ while running:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             running = False
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and teljari == 0:
-            #sounds["skot"].play()
+            sounds["skot"].play()
             shot = klasar.Missile(missile)
-            shot.rect.x = player.rect.x + 22
-            shot.rect.y = player.rect.y
+            shot.rect.x = player.rect.x + 14
+            shot.rect.y = player.rect.y + 4
             missile_list.add(shot)
             all_sprites_list.add(shot)
             flag = True
 
-    if enemy_shot % 53 == 0:
+    if enemy_shot % 40 == 0:
         eSkot = klasar.Missile(eMissile)
         a = random.randrange(0, len(enemy_list))
-        eSkot.rect.x = enemy_list.sprites()[a].rect.x
-        eSkot.rect.y = enemy_list.sprites()[a].rect.y
+        eSkot.rect.x = enemy_list.sprites()[a].rect.x + 21
+        eSkot.rect.y = enemy_list.sprites()[a].rect.y + 40
         e_missile_list.add(eSkot)
         all_sprites_list.add(eSkot)
 
@@ -120,8 +121,19 @@ while running:
     if key[pygame.K_RIGHT] or key[pygame.K_d]:
         player.move(2)
 
-    pygame.sprite.groupcollide(missile_list, enemy_list, True, True) and print("asd")#sounds["ovinur_deyr"].play()
-    pygame.sprite.groupcollide(missile_list or e_missile_list, cover_list, True, True) and print("asd")#sounds["cover_collision"].play()
+    if pygame.sprite.groupcollide(missile_list, enemy_list, True, True):
+        sounds["ovinur_deyr"].play()
+        print("asd2")
+    if pygame.sprite.groupcollide(missile_list, cover_list, True, True):
+        print("asd3")
+        sounds["cover_collision"].play()
+    if pygame.sprite.groupcollide(e_missile_list, cover_list, True, True):
+        print("asd")
+        sounds["cover_collision"].play()
+
+    if pygame.sprite.groupcollide(e_missile_list, missile_list, True, True):
+        print("collision")
+        sounds["skot_collide"].play()
 
     if lif >= 0:
         if pygame.sprite.groupcollide(e_missile_list, player_list, True, False):
@@ -133,16 +145,19 @@ while running:
                 running = False
 
     for eshot in e_missile_list:
-        eshot.rect.y += 5
+        eshot.rect.y += 4
 
     for shot in missile_list:
         shot.rect.y -= 5
+
     for block in enemy_list:
+        if teljariS % 15 == 0:
+            px = 2
         if block.rect.x == 0:
-            speed = 1
+            speed = px
             flag2 = True
-        if block.rect.x == 800:
-            speed = -1
+        if block.rect.x == 803:
+            speed = -px
             flag2 = True
         if flag2:
             for x in range(len(enemy_list)):
