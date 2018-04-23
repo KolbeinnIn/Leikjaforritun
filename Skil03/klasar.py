@@ -17,20 +17,32 @@ class Player(pygame.sprite.Sprite):
         self.stig = 0
         self.window = window
 
-    def move(self, dx):
+    def move(self, dx, dy):
         if dx != 0:
-            self.move_single_axis(dx)
+            self.move_single_axis(dx, dy)
+        if dy != 0:
+            self.move_single_axis(dx, dy)
 
-    def move_single_axis(self, dx):
-        if self.rect.x <= 1262:
+    def move_single_axis(self, dx, dy):
+        if self.rect.x <= 846:
             self.rect.x += dx
         else:
-            self.rect.x = 1262
+            self.rect.x = 0
 
         if self.rect.x >= 0:
             self.rect.x += dx
         else:
-            self.rect.x = 0
+            self.rect.x = 813
+
+        if self.rect.y <= 399:
+            self.rect.y += dy
+        else:
+            self.rect.y = 399
+
+        if self.rect.y >= -45:
+            self.rect.y += dy
+        else:
+            self.rect.y = 399
 
 
 class Missile(pygame.sprite.Sprite):
@@ -45,6 +57,7 @@ class Enemy(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = enemy_image
         self.rect = self.image.get_rect()
+
 
 class Cover(pygame.sprite.Sprite):
     def __init__(self, block_image):
