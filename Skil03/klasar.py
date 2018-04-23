@@ -45,3 +45,11 @@ class Enemy(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = enemy_image
         self.rect = self.image.get_rect()
+
+class Cover(pygame.sprite.Sprite):
+    def __init__(self, block_image):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = block_image
+        self.rect = self.image.get_rect()
+
+
