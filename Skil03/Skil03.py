@@ -152,7 +152,7 @@ while running:
             shot.rect.y -= 5
 
         for block in enemy_list:
-            if teljariS % 15 == 0:
+            if teljariS % 20 == 0:
                 px = 2
             if block.rect.x == 0:
                 speed = px
@@ -164,6 +164,7 @@ while running:
                 for x in range(len(enemy_list)):
                     enemy_list.sprites()[x].rect.y += 3
                 flag2 = False
+                teljariS += 1
             block.rect.x += speed
 
         if lif == 0:
