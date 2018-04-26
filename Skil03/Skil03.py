@@ -152,7 +152,7 @@ while running:
             shot.rect.y -= 5
 
         for block in enemy_list:
-            if teljariS % 20 == 0:
+            if teljariS % 15 == 0:
                 px = 2
             if block.rect.x == 0:
                 speed = px
