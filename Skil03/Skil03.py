@@ -46,11 +46,11 @@ cover_list = pygame.sprite.Group()
 all_sprites_list = pygame.sprite.Group()
 all_sprites_list.add(player)
 
-
 sounds = {}
-for sound_name in ["ovinur_deyr", "skot", "cover_collision", "skot_collide"]:
+for sound_name in ["skot", "cover_collision", "skot_collide"]:
     sounds[sound_name] = pygame.mixer.Sound("sounds/{}.ogg".format(sound_name))
     sounds[sound_name].set_volume(10)
+
 
 #Enemies
 for row in range(4):
@@ -128,7 +128,8 @@ while running:
             player.move(0, -1)
 
         if pygame.sprite.groupcollide(missile_list, enemy_list, True, True):
-            sounds["ovinur_deyr"].play()
+            pass
+            #sounds["ovinur_deyr"].play()
         if pygame.sprite.groupcollide(missile_list, cover_list, True, True):
             sounds["cover_collision"].play()
         if pygame.sprite.groupcollide(e_missile_list, cover_list, True, True):
@@ -139,11 +140,11 @@ while running:
         d = pygame.sprite.groupcollide(enemy_list, player_list, True, False)
         if lif >= 0:
             if c or d:
-                # sounds["lose_life"].play()
+                #sounds["lose_life"].play()
                 lif -= 1
                 if lif == 0:
                     time.sleep(2)
-                    # sounds["game_over"].play()
+                    #sounds["game_over"].play()
 
         for eshot in e_missile_list:
             eshot.rect.y += 4

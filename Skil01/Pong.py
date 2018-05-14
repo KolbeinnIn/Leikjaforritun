@@ -6,6 +6,8 @@
 import pygame
 import time
 from random import *
+
+
 while True:
     nafn = input("Sláðu inn MAX 3 stafi: ")
     if len(nafn) > 3 or len(nafn) < 1:
